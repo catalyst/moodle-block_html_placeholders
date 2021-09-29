@@ -38,6 +38,7 @@ class block_html_placeholders extends block_base {
 
     public function specialization() {
         if (isset($this->config->title)) {
+            $this->config->title = $this->replace_placeholders($this->config->title);
             $this->title = $this->title = format_string($this->config->title, true, ['context' => $this->context]);
         } else {
             $this->title = get_string('newhtml_placeholdersblock', 'block_html_placeholders');
@@ -75,6 +76,9 @@ class block_html_placeholders extends block_base {
                 'content',
                 null
             );
+
+            $this->config->text = $this->replace_placeholders($this->config->text);
+
             // Default to FORMAT_HTML which is what will have been used before the
             // editor was properly implemented for the block.
             $format = FORMAT_HTML;
@@ -114,6 +118,8 @@ class block_html_placeholders extends block_base {
                 // Fancy html_placeholders allowed only on course, category and system blocks.
                 $filteropt->noclean = true;
             }
+
+            $this->config->text = $this->replace_placeholders($this->config->text);
 
             $format = FORMAT_HTML;
             // Check to see if the format has been properly set on the config.
@@ -296,6 +302,45 @@ class block_html_placeholders extends block_base {
         }
 
         return $placeholders;
+    }
+
+    /**
+     * Replaces all known placeholders in the provided string.
+     *
+     * @param string $str String to process.
+     * @return string
+     */
+    protected function replace_placeholders(string $str) {
+        foreach ($this->get_supported_placeholders() as $placeholder => $defaultvalue) {
+            $str = str_replace('{{' . $placeholder . '}}', $this->get_placeholder_value($placeholder, $defaultvalue), $str);
+        }
+
+        return $str;
+    }
+
+    /**
+     *  Returns placeholder value for provided placeholder.
+     *
+     * Logic:
+     *  1. Try to get from URL.
+     *  2. Try to get from user preferences.
+     *  3. Fall back to the default value from config.
+     *
+     * @param string $placeholder Placeholder name.
+     * @param string $defaultvalue Default value.
+     *
+     * @return string
+     */
+    protected function get_placeholder_value(string $placeholder, string $defaultvalue) {
+        $value = optional_param($placeholder, '', PARAM_TEXT);
+        if (!empty($value)) {
+            // Remember placeholder selection for the user.
+            set_user_preference($placeholder, $value);
+        } else {
+            $value = get_user_preferences($placeholder, $defaultvalue);
+        }
+
+        return $value;
     }
 
 }
