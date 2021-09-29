@@ -16,22 +16,23 @@
 
 /**
  * Form for editing HTML block instances.
- *
  * @copyright 2010 Petr Skoda (http://skodak.org)
  * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  * @package   block_html_placeholders
  * @category  files
+ *
  * @param stdClass $course course object
- * @param stdClass $birecord_or_cm block instance record
+ * @param stdClass $birecordorcm block instance record
  * @param stdClass $context context object
  * @param string $filearea file area
  * @param array $args extra arguments
  * @param bool $forcedownload whether or not force download
  * @param array $options additional options affecting the file serving
+ *
  * @return bool
  * @todo MDL-36050 improve capability check on stick blocks, so we can check user capability before sending images.
  */
-function block_html_placeholders_pluginfile($course, $birecord_or_cm, $context, $filearea, $args, $forcedownload, array $options=array()) {
+function block_html_placeholders_pluginfile($course, $birecordorcm, $context, $filearea, $args, $forcedownload, array $options=[]) {
     global $DB, $CFG, $USER;
 
     if ($context->contextlevel != CONTEXT_BLOCK) {
@@ -67,23 +68,24 @@ function block_html_placeholders_pluginfile($course, $birecord_or_cm, $context, 
     $filename = array_pop($args);
     $filepath = $args ? '/'.implode('/', $args).'/' : '/';
 
-    if (!$file = $fs->get_file($context->id, 'block_html_placeholders', 'content', 0, $filepath, $filename) or $file->is_directory()) {
+    $file = $fs->get_file($context->id, 'block_html_placeholders', 'content', 0, $filepath, $filename) or $file->is_directory();
+    if (!$file) {
         send_file_not_found();
     }
 
-    if ($parentcontext = context::instance_by_id($birecord_or_cm->parentcontextid, IGNORE_MISSING)) {
+    if ($parentcontext = context::instance_by_id($birecordorcm->parentcontextid, IGNORE_MISSING)) {
         if ($parentcontext->contextlevel == CONTEXT_USER) {
-            // force download on all personal pages including /my/
-            //because we do not have reliable way to find out from where this is used
+            // Force download on all personal pages including /my/
+            // because we do not have reliable way to find out from where this is used.
             $forcedownload = true;
         }
     } else {
-        // weird, there should be parent context, better force dowload then
+        // Weird, there should be parent context, better force download then.
         $forcedownload = true;
     }
 
-    // NOTE: it woudl be nice to have file revisions here, for now rely on standard file lifetime,
-    //       do not lower it because the files are dispalyed very often.
+    // NOTE: it would be nice to have file revisions here, for now rely on standard file lifetime,
+    // do not lower it because the files are displayed very often.
     \core\session\manager::write_close();
     send_stored_file($file, null, 0, $forcedownload, $options);
 }
@@ -99,7 +101,7 @@ function block_html_placeholders_global_db_replace($search, $replace) {
 
     $instances = $DB->get_recordset('block_instances', array('blockname' => 'html_placeholders'));
     foreach ($instances as $instance) {
-        // TODO: intentionally hardcoded until MDL-26800 is fixed
+        // TODO: intentionally hardcoded until MDL-26800 is fixed.
         $config = unserialize(base64_decode($instance->configdata));
         if (isset($config->text) and is_string($config->text)) {
             $config->text = str_replace($search, $replace, $config->text);

@@ -21,11 +21,11 @@
  * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 /**
  * Specialised restore task for the html_placeholders block
  * (requires encode_content_links in some configdata attrs)
- *
- * TODO: Finish phpdocs
  */
 class restore_html_placeholders_block_task extends restore_block_task {
 
@@ -40,10 +40,10 @@ class restore_html_placeholders_block_task extends restore_block_task {
     }
 
     public function get_configdata_encoded_attributes() {
-        return array('text'); // We need to encode some attrs in configdata
+        return array('text'); // We need to encode some attrs in configdata.
     }
 
-    static public function define_decode_contents() {
+    public static function define_decode_contents() {
 
         $contents = array();
 
@@ -52,7 +52,7 @@ class restore_html_placeholders_block_task extends restore_block_task {
         return $contents;
     }
 
-    static public function define_decode_rules() {
+    public static function define_decode_rules() {
         return array();
     }
 }
@@ -64,12 +64,12 @@ class restore_html_placeholders_block_task extends restore_block_task {
  */
 class restore_html_placeholders_block_decode_content extends restore_decode_content {
 
-    protected $configdata; // Temp storage for unserialized configdata
+    protected $configdata; // Temp storage for unserialized configdata.
 
     protected function get_iterator() {
         global $DB;
 
-        // Build the SQL dynamically here
+        // Build the SQL dynamically here.
         $fieldslist = 't.' . implode(', t.', $this->fields);
         $sql = "SELECT t.id, $fieldslist
                   FROM {" . $this->tablename . "} t

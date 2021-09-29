@@ -158,7 +158,7 @@ class provider implements
                 continue;
             }
 
-            $html_placeholders = writer::with_context($context)
+            $htmlplaceholders = writer::with_context($context)
                 ->rewrite_pluginfile_urls([], 'block_html_placeholders', 'content', null, $block->config->text);
 
             // Default to FORMAT_HTML which is what will have been used before the
@@ -169,12 +169,12 @@ class provider implements
                 'overflowdiv' => true,
                 'noclean' => true,
             ];
-            $html_placeholders = format_text($html_placeholders, $format, $filteropt);
+            $htmlplaceholders = format_text($htmlplaceholders, $format, $filteropt);
 
             $data = helper::get_context_data($context, $user);
             helper::export_context_files($context, $user);
             $data->title = $block->config->title;
-            $data->content = $html_placeholders;
+            $data->content = $htmlplaceholders;
 
             writer::with_context($context)->export_data([], $data);
         }

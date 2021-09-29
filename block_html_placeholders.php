@@ -24,19 +24,19 @@
 
 class block_html_placeholders extends block_base {
 
-    function init() {
+    public function init() {
         $this->title = get_string('pluginname', 'block_html_placeholders');
     }
 
-    function has_config() {
+    public function has_config() {
         return true;
     }
 
-    function applicable_formats() {
+    public function applicable_formats() {
         return array('all' => true);
     }
 
-    function specialization() {
+    public function specialization() {
         if (isset($this->config->title)) {
             $this->title = $this->title = format_string($this->config->title, true, ['context' => $this->context]);
         } else {
@@ -44,44 +44,51 @@ class block_html_placeholders extends block_base {
         }
     }
 
-    function instance_allow_multiple() {
+    public function instance_allow_multiple() {
         return true;
     }
 
-    function get_content() {
+    public function get_content() {
         global $CFG;
 
         require_once($CFG->libdir . '/filelib.php');
 
-        if ($this->content !== NULL) {
+        if ($this->content !== null) {
             return $this->content;
         }
 
         $filteropt = new stdClass;
         $filteropt->overflowdiv = true;
         if ($this->content_is_trusted()) {
-            // fancy html_placeholders allowed only on course, category and system blocks.
+            // Fancy html_placeholders allowed only on course, category and system blocks.
             $filteropt->noclean = true;
         }
 
         $this->content = new stdClass;
         $this->content->footer = '';
         if (isset($this->config->text)) {
-            // rewrite url
-            $this->config->text = file_rewrite_pluginfile_urls($this->config->text, 'pluginfile.php', $this->context->id, 'block_html_placeholders', 'content', NULL);
+            // Rewrite url.
+            $this->config->text = file_rewrite_pluginfile_urls(
+                $this->config->text, 'pluginfile.php',
+                $this->context->id,
+                'block_html_placeholders',
+                'content',
+                null
+            );
             // Default to FORMAT_HTML which is what will have been used before the
             // editor was properly implemented for the block.
             $format = FORMAT_HTML;
-            // Check to see if the format has been properly set on the config
+            // Check to see if the format has been properly set on the config.
             if (isset($this->config->format)) {
                 $format = $this->config->format;
             }
             $this->content->text = format_text($this->config->text, $format, $filteropt);
+
         } else {
             $this->content->text = '';
         }
 
-        unset($filteropt); // memory footprint
+        unset($filteropt); // Memory footprint.
 
         return $this->content;
     }
@@ -114,7 +121,15 @@ class block_html_placeholders extends block_base {
                 $format = $this->config->format;
             }
             list($bc->content, $bc->contentformat) =
-                external_format_text($this->config->text, $format, $this->context, 'block_html_placeholders', 'content', null, $filteropt);
+                external_format_text(
+                    $this->config->text,
+                    $format,
+                    $this->context,
+                    'block_html_placeholders',
+                    'content',
+                    null,
+                    $filteropt
+                );
             $bc->files = external_util::get_area_files($this->context->id, 'block_html_placeholders', 'content', false, false);
 
         }
@@ -125,18 +140,26 @@ class block_html_placeholders extends block_base {
     /**
      * Serialize and store config data
      */
-    function instance_config_save($data, $nolongerused = false) {
+    public function instance_config_save($data, $nolongerused = false) {
         global $DB;
 
         $config = clone($data);
-        // Move embedded files into a proper filearea and adjust HTML links to match
-        $config->text = file_save_draft_area_files($data->text['itemid'], $this->context->id, 'block_html_placeholders', 'content', 0, array('subdirs'=>true), $data->text['text']);
+        // Move embedded files into a proper filearea and adjust HTML links to match.
+        $config->text = file_save_draft_area_files(
+            $data->text['itemid'],
+            $this->context->id,
+            'block_html_placeholders',
+            'content',
+            0,
+            ['subdirs' => true],
+            $data->text['text']
+        );
         $config->format = $data->text['format'];
 
         parent::instance_config_save($config, $nolongerused);
     }
 
-    function instance_delete() {
+    public function instance_delete() {
         global $DB;
         $fs = get_file_storage();
         $fs->delete_area_files($this->context->id, 'block_html_placeholders');
@@ -154,26 +177,41 @@ class block_html_placeholders extends block_base {
         // This extra check if file area is empty adds one query if it is not empty but saves several if it is.
         if (!$fs->is_area_empty($fromcontext->id, 'block_html_placeholders', 'content', 0, false)) {
             $draftitemid = 0;
-            file_prepare_draft_area($draftitemid, $fromcontext->id, 'block_html_placeholders', 'content', 0, array('subdirs' => true));
-            file_save_draft_area_files($draftitemid, $this->context->id, 'block_html_placeholders', 'content', 0, array('subdirs' => true));
+            file_prepare_draft_area(
+                $draftitemid,
+                $fromcontext->id,
+                'block_html_placeholders',
+                'content',
+                0,
+                ['subdirs' => true]
+            );
+            file_save_draft_area_files(
+                $draftitemid,
+                $this->context->id,
+                'block_html_placeholders',
+                'content',
+                0,
+                ['subdirs' => true]
+            );
         }
+
         return true;
     }
 
-    function content_is_trusted() {
+    public function content_is_trusted() {
         global $SCRIPT;
 
         if (!$context = context::instance_by_id($this->instance->parentcontextid, IGNORE_MISSING)) {
             return false;
         }
-        //find out if this block is on the profile page
+        // Find out if this block is on the profile page.
         if ($context->contextlevel == CONTEXT_USER) {
             if ($SCRIPT === '/my/index.php') {
-                // this is exception - page is completely private, nobody else may see content there
-                // that is why we allow JS here
+                // This is exception - page is completely private, nobody else may see content there
+                // that is why we allow JS here.
                 return true;
             } else {
-                // no JS on public personal pages, it would be a big security issue
+                // No JS on public personal pages, it would be a big security issue.
                 return false;
             }
         }
@@ -196,10 +234,10 @@ class block_html_placeholders extends block_base {
      *
      * @return array
      */
-    function html_placeholders_attributes() {
+    public function html_attributes() {
         global $CFG;
 
-        $attributes = parent::html_placeholders_attributes();
+        $attributes = parent::html_attributes();
 
         if (!empty($CFG->block_html_placeholders_allowcssclasses)) {
             if (!empty($this->config->classes)) {
@@ -228,4 +266,5 @@ class block_html_placeholders extends block_base {
             'plugin' => $pluginconfigs,
         ];
     }
+
 }

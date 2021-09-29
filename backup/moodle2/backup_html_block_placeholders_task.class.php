@@ -21,11 +21,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 /**
  * Specialised backup task for the html_placeholders block
  * (requires encode_content_links in some configdata attrs)
- *
- * TODO: Finish phpdocs
  */
 class backup_html_placeholders_block_task extends backup_block_task {
 
@@ -40,11 +40,11 @@ class backup_html_placeholders_block_task extends backup_block_task {
     }
 
     public function get_configdata_encoded_attributes() {
-        return array('text'); // We need to encode some attrs in configdata
+        return array('text'); // We need to encode some attrs in configdata.
     }
 
-    static public function encode_content_links($content) {
-        return $content; // No special encoding of links
+    public static function encode_content_links($content) {
+        return $content; // No special encoding of links.
     }
 }
 
