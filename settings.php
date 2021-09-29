@@ -31,6 +31,11 @@ if ($ADMIN->fulltree) {
         get_string('configallowadditionalcssclasses', 'block_html_placeholders'),
         0)
     );
+
+    $settings->add(new admin_setting_configtextarea(
+        'block_html_placeholders_placeholders',
+        get_string('placeholders', 'block_html_placeholders'),
+        get_string('placeholders_desc', 'block_html_placeholders'),
+        '')
+    );
 }
-
-

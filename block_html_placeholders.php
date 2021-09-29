@@ -267,4 +267,35 @@ class block_html_placeholders extends block_base {
         ];
     }
 
+    /**
+     * Returns a list of available placeholders and their default values.
+     *
+     * @return string[]
+     */
+    protected function get_supported_placeholders() {
+        global $CFG;
+
+        $placeholders = [];
+        $config = $CFG->block_html_placeholders_placeholders;
+
+        if (!empty($config)) {
+            $placeholderstrings = explode("\n", str_replace("\r\n", "\n", $config));
+
+            foreach ($placeholderstrings as $placeholderstring) {
+                $placeholder = new \stdClass();
+                $parts = explode('|', $placeholderstring);
+                if (count($parts) === 2) {
+                    $placeholder->name = trim($parts[0]);
+                    $placeholder->default = trim($parts[1]);
+
+                    if (!empty($placeholder->name) && !empty($placeholder->default)) {
+                        $placeholders[$placeholder->name] = $placeholder->default;
+                    }
+                }
+            }
+        }
+
+        return $placeholders;
+    }
+
 }
