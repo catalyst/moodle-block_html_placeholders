@@ -53,8 +53,10 @@ class block_html_placeholders extends block_base {
     }
 
     public function specialization() {
+        $this->placeholders->remember_placeholders_for_user();
+
         if (isset($this->config->title)) {
-            $this->config->title = $this->replace_placeholders($this->config->title);
+            $this->config->title = $this->placeholders->replace_placeholders($this->config->title);
             $this->title = $this->title = format_string($this->config->title, true, ['context' => $this->context]);
         } else {
             $this->title = get_string('newhtml_placeholdersblock', 'block_html_placeholders');
@@ -93,7 +95,7 @@ class block_html_placeholders extends block_base {
                 null
             );
 
-            $this->config->text = $this->replace_placeholders($this->config->text);
+            $this->config->text = $this->placeholders->replace_placeholders($this->config->text);
 
             // Default to FORMAT_HTML which is what will have been used before the
             // editor was properly implemented for the block.
@@ -135,7 +137,7 @@ class block_html_placeholders extends block_base {
                 $filteropt->noclean = true;
             }
 
-            $this->config->text = $this->replace_placeholders($this->config->text);
+            $this->config->text = $this->placeholders->replace_placeholders($this->config->text);
 
             $format = FORMAT_HTML;
             // Check to see if the format has been properly set on the config.
@@ -286,18 +288,6 @@ class block_html_placeholders extends block_base {
             'instance' => $instanceconfigs,
             'plugin' => $pluginconfigs,
         ];
-    }
-
-    /**
-     * Replaces all known placeholders in the provided string.
-     *
-     * @param string $str String to process.
-     * @return string
-     */
-    protected function replace_placeholders(string $str) {
-        $this->placeholders->remember_placeholders_for_user();
-
-        return $this->placeholders->replace_placeholders($str);
     }
 
 }
