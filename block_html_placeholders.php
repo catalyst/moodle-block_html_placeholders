@@ -15,16 +15,32 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Form for editing HTML block instances.
+ * Block instance.
  *
  * @package   block_html_placeholders
  * @copyright 1999 onwards Martin Dougiamas (http://dougiamas.com)
  * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 
+use \block_html_placeholders\placeholders;
+
+/**
+ * Block instance.
+ *
+ * @package   block_html_placeholders
+ * @copyright 1999 onwards Martin Dougiamas (http://dougiamas.com)
+ * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
+ */
 class block_html_placeholders extends block_base {
+    /**
+     * Placeholders instance.
+     *
+     * @var placeholders
+     */
+    private $placeholders;
 
     public function init() {
+        $this->placeholders = new placeholders();
         $this->title = get_string('pluginname', 'block_html_placeholders');
     }
 
@@ -141,7 +157,6 @@ class block_html_placeholders extends block_base {
         }
         return $bc;
     }
-
 
     /**
      * Serialize and store config data
@@ -274,73 +289,15 @@ class block_html_placeholders extends block_base {
     }
 
     /**
-     * Returns a list of available placeholders and their default values.
-     *
-     * @return string[]
-     */
-    protected function get_supported_placeholders() {
-        global $CFG;
-
-        $placeholders = [];
-        $config = $CFG->block_html_placeholders_placeholders;
-
-        if (!empty($config)) {
-            $placeholderstrings = explode("\n", str_replace("\r\n", "\n", $config));
-
-            foreach ($placeholderstrings as $placeholderstring) {
-                $placeholder = new \stdClass();
-                $parts = explode('|', $placeholderstring);
-                if (count($parts) === 2) {
-                    $placeholder->name = trim($parts[0]);
-                    $placeholder->default = trim($parts[1]);
-
-                    if (!empty($placeholder->name) && !empty($placeholder->default)) {
-                        $placeholders[$placeholder->name] = $placeholder->default;
-                    }
-                }
-            }
-        }
-
-        return $placeholders;
-    }
-
-    /**
      * Replaces all known placeholders in the provided string.
      *
      * @param string $str String to process.
      * @return string
      */
     protected function replace_placeholders(string $str) {
-        foreach ($this->get_supported_placeholders() as $placeholder => $defaultvalue) {
-            $str = str_replace('{{' . $placeholder . '}}', $this->get_placeholder_value($placeholder, $defaultvalue), $str);
-        }
+        $this->placeholders->remember_placeholders_for_user();
 
-        return $str;
-    }
-
-    /**
-     *  Returns placeholder value for provided placeholder.
-     *
-     * Logic:
-     *  1. Try to get from URL.
-     *  2. Try to get from user preferences.
-     *  3. Fall back to the default value from config.
-     *
-     * @param string $placeholder Placeholder name.
-     * @param string $defaultvalue Default value.
-     *
-     * @return string
-     */
-    protected function get_placeholder_value(string $placeholder, string $defaultvalue) {
-        $value = optional_param($placeholder, '', PARAM_TEXT);
-        if (!empty($value)) {
-            // Remember placeholder selection for the user.
-            set_user_preference($placeholder, $value);
-        } else {
-            $value = get_user_preferences($placeholder, $defaultvalue);
-        }
-
-        return $value;
+        return $this->placeholders->replace_placeholders($str);
     }
 
 }
