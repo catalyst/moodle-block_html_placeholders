@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Unit test for search indexing.
+ * Unit test for placeholder functionality.
  *
  * @package block_html_placeholders
  * @copyright 2021 Catalyst IT
@@ -27,7 +27,7 @@ namespace block_html_placeholders;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Unit test for search indexing.
+ * Unit test for placeholder functionality.
  *
  * @package block_html_placeholders
  * @copyright 2021 Catalyst IT
