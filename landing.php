@@ -33,10 +33,8 @@ if ($redirect) {
     redirect($redirect);
 }
 
-$strmymoodle = get_string('myhome');
-
-$header = "$SITE->shortname: $strmymoodle";
-$pagetitle = $header;
+$header = $SITE->shortname;
+$pagetitle = $SITE->shortname;
 $context = context_system::instance();
 
 if (!isguestuser()) {
