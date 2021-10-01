@@ -1,3 +1,5 @@
+![Build Status](https://github.com/catalyst/moodle-block-html-with-placeholders/actions/workflows/39-master.yml/badge.svg?branch=MOODLE_39_STABLE)
+
 * [Branches](#branches)
 * [What is this?](#what-is-this)
 * [Helper page?](#helper-page)
