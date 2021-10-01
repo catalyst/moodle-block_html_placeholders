@@ -34,3 +34,10 @@ $string['newhtml_placeholdersblock'] = '(new HTML with placeholders block)';
 $string['pluginname'] = 'HTML with placeholders';
 $string['search:content'] = 'HTML with placeholders block content';
 $string['privacy:metadata:block'] = 'The HTML with placeholders block stores all of its data within the block subsystem.';
+$string['placeholders'] = 'Placeholders';
+$string['placeholders_desc'] = 'A list of supported placeholders. The placeholder name followed by a pipe (|) and the default value of that placeholder. Only one placehoder per line, separated by a line break in between each placeholder.
+For example:
+<pre>
+profession | Doctor
+type | On-line
+</pre>';

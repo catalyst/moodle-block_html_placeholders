@@ -15,16 +15,32 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Form for editing HTML block instances.
+ * Block instance.
  *
  * @package   block_html_placeholders
  * @copyright 1999 onwards Martin Dougiamas (http://dougiamas.com)
  * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 
+use \block_html_placeholders\placeholders;
+
+/**
+ * Block instance.
+ *
+ * @package   block_html_placeholders
+ * @copyright 1999 onwards Martin Dougiamas (http://dougiamas.com)
+ * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
+ */
 class block_html_placeholders extends block_base {
+    /**
+     * Placeholders instance.
+     *
+     * @var placeholders
+     */
+    private $placeholders;
 
     public function init() {
+        $this->placeholders = new placeholders();
         $this->title = get_string('pluginname', 'block_html_placeholders');
     }
 
@@ -37,7 +53,10 @@ class block_html_placeholders extends block_base {
     }
 
     public function specialization() {
+        $this->placeholders->remember_placeholders_for_user();
+
         if (isset($this->config->title)) {
+            $this->config->title = $this->placeholders->replace_placeholders($this->config->title);
             $this->title = $this->title = format_string($this->config->title, true, ['context' => $this->context]);
         } else {
             $this->title = get_string('newhtml_placeholdersblock', 'block_html_placeholders');
@@ -75,6 +94,9 @@ class block_html_placeholders extends block_base {
                 'content',
                 null
             );
+
+            $this->config->text = $this->placeholders->replace_placeholders($this->config->text);
+
             // Default to FORMAT_HTML which is what will have been used before the
             // editor was properly implemented for the block.
             $format = FORMAT_HTML;
@@ -115,6 +137,8 @@ class block_html_placeholders extends block_base {
                 $filteropt->noclean = true;
             }
 
+            $this->config->text = $this->placeholders->replace_placeholders($this->config->text);
+
             $format = FORMAT_HTML;
             // Check to see if the format has been properly set on the config.
             if (isset($this->config->format)) {
@@ -135,7 +159,6 @@ class block_html_placeholders extends block_base {
         }
         return $bc;
     }
-
 
     /**
      * Serialize and store config data
