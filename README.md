@@ -1,4 +1,4 @@
-![Build Status](https://github.com/catalyst/moodle-block_html_placeholders/actions/workflows/39-master.yml/badge.svg?branch=MOODLE_39_STABLE)
+![Build Status](https://github.com/catalyst/moodle-block_html_placeholders/actions/workflows/39-master.yml/badge.svg?branch=master)
 
 * [Branches](#branches)
 * [What is this?](#what-is-this)
