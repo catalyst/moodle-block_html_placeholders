@@ -1,3 +1,5 @@
+![Build Status](https://github.com/catalyst/moodle-block_html_placeholders/actions/workflows/39-master.yml/badge.svg?branch=MOODLE_39_STABLE)
+
 * [Branches](#branches)
 * [What is this?](#what-is-this)
 * [Helper page?](#helper-page)
@@ -57,11 +59,11 @@ Installation and Configuration
 
     Using git
 
-     git clone git@github.com:catalyst/moodle-html_placeholders.git blocks/html_placeholders
+     git clone git@github.com:catalyst/moodle-block_html_placeholders.git blocks/html_placeholders
 
     Or install via the Moodle plugin directory:
 
-     https://moodle.org/plugins/html_placeholders
+     https://moodle.org/plugins/block_html_placeholders
 
 2. Then run the Moodle upgrade
 
@@ -80,7 +82,7 @@ Issues and feedback
 
 If you have issues please log them in github here:
 
-https://github.com/catalyst/html_placeholders/issues
+https://github.com/catalyst/moodle-block_html_placeholders/issues
 
 Or if you want paid support please contact Catalyst IT Australia:
 

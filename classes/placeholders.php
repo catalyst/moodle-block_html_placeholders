@@ -47,10 +47,8 @@ class placeholders {
     public function __construct() {
         global $CFG;
 
-        $config = $CFG->block_html_placeholders_placeholders;
-
-        if (!empty($config)) {
-            $placeholderstrings = explode("\n", str_replace("\r\n", "\n", $config));
+        if (!empty($CFG->block_html_placeholders_placeholders)) {
+            $placeholderstrings = explode("\n", str_replace("\r\n", "\n", $CFG->block_html_placeholders_placeholders));
 
             foreach ($placeholderstrings as $placeholderstring) {
                 $placeholder = new \stdClass();
