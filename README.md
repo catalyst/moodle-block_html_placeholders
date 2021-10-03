@@ -44,12 +44,26 @@ Examples
    
    https://example.com/?profession=Doctor -> will replace {{profession}} with Doctor 
    
-   https://example.com/?profession=Nurse  -> will replace {{profession}} with Nurse
+   https://example.com/?profession=Nurse -> will replace {{profession}} with Nurse
 
 2. Your Moodle front page has an instance of html_placeholders block with {{profession}} and {{type}} placeholders in 
    its content. 
    
    https://example.com/blocks/html_placeholders/landing.php?redirect=/&profession=Doctor&type=On-line -> will set  profession and type for a user and then redirect to the front page, where will replace {{profession}} with Doctor and  {{type}} with On-line
+
+
+Using Shortcodes
+-------------   
+
+This plugin supports shortcodes (see https://moodle.org/plugins/filter_shortcodes).
+
+To be able to utilise this feature you require filter_shortcodes plugin to be installed in you Moodle.  
+
+Then you can wrap your placeholders into [htmlplaceholder] tag in any HTML content across your site.
+
+Example: 
+
+[htmlplaceholder]{{profession}}[/htmlplaceholder]
 
 
 Installation and Configuration
@@ -65,11 +79,15 @@ Installation and Configuration
 
      https://moodle.org/plugins/block_html_placeholders
 
-2. Then run the Moodle upgrade
+2. If you require using Shortcodes, then install additional filter_shortcodes plugin (see https://moodle.org/plugins/filter_shortcodes)  
+
+3. Then run the Moodle upgrade
 
 4. Visit Site Administration -> Plugins -> Blocks -> HTML with placeholders and configure the list of placeholders.
 
-3. Now add the block to any page, then you can embed your placeholders as {{placeholder_name}} in HTML content or title. 
+5. Now add the block to any page, then you can embed your placeholders as {{placeholder_name}} in HTML content or title. 
+
+6. If you use filter_shortcodes, then you can embed your placeholders as [htmlplaceholder]{{placeholder_name}}[/htmlplaceholder] in any HTML content.
 
 
 Contributing
