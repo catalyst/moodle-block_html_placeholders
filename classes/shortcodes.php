@@ -47,7 +47,7 @@ class shortcodes {
      * @return mixed
      */
     public static function placeholder(string $shortcode, array $args, ?string $content, $env, $next): string {
-        if ($shortcode == 'htmlplaceholder') {
+        if ($shortcode === 'htmlplaceholder') {
             $placeholder = new placeholders();
             $placeholder->remember_placeholders_for_user();
             $content = $placeholder->replace_placeholders($content);
