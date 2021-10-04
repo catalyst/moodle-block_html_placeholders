@@ -57,7 +57,7 @@ Using Shortcodes
 
 This plugin supports shortcodes (see https://moodle.org/plugins/filter_shortcodes).
 
-To be able to utilise this feature you require filter_shortcodes plugin to be installed in you Moodle.  
+To be able to utilise this feature you require filter_shortcodes plugin to be installed in your Moodle.  
 
 Then you can wrap your placeholders into [htmlplaceholder] tag in any HTML content across your site.
 
