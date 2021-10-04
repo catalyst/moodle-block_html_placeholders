@@ -44,10 +44,10 @@ class shortcodes {
      * @param object $env The filter environment object, amongst other things contains the context.
      * @param Closure $next The function to pass the content through when embedded shortcodes should apply.
      *
-     * @return mixed
+     * @return ?string
      */
-    public static function placeholder(string $shortcode, array $args, ?string $content, $env, $next): string {
-        if ($shortcode === 'htmlplaceholder') {
+    public static function placeholder(string $shortcode, array $args, ?string $content, $env, $next): ?string {
+        if ($shortcode === 'htmlplaceholder' && !is_null($content)) {
             $placeholder = new placeholders();
             $placeholder->remember_placeholders_for_user();
             $content = $placeholder->replace_placeholders($content);
