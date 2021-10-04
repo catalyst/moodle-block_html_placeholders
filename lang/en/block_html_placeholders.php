@@ -41,3 +41,8 @@ For example:
 profession | Doctor
 type | On-line
 </pre>';
+$string['shortcodes'] = 'Displays the placeholder.';
+$string['shortcodes_help'] = 'Wrap your placeholder into [htmlplaceholder] tag.
+
+Example:
+    [htmlplaceholder]{{profession}}[/htmlplaceholder]';
