@@ -262,7 +262,7 @@ class block_html_placeholders extends block_base {
 
         $attributes = parent::html_attributes();
 
-        if (!empty($CFG->block_html_placeholders_allowcssclasses)) {
+        if (!empty(get_config('block_html_placeholders', 'allowcssclasses'))) {
             if (!empty($this->config->classes)) {
                 $attributes['class'] .= ' '.$this->config->classes;
             }
@@ -282,7 +282,7 @@ class block_html_placeholders extends block_base {
 
         // Return all settings for all users since it is safe (no private keys, etc..).
         $instanceconfigs = !empty($this->config) ? $this->config : new stdClass();
-        $pluginconfigs = (object) ['allowcssclasses' => $CFG->block_html_placeholders_allowcssclasses];
+        $pluginconfigs = (object) ['allowcssclasses' => get_config('block_html_placeholders', 'allowcssclasses')];
 
         return (object) [
             'instance' => $instanceconfigs,

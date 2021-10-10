@@ -33,20 +33,19 @@ defined('MOODLE_INTERNAL') || die();
 function xmldb_block_html_placeholders_upgrade($oldversion) {
     global $CFG;
 
-    // Automatically generated Moodle v3.5.0 release upgrade line.
-    // Put any upgrade step following this.
+    if ($oldversion < 2020061503) {
+        if (!empty($CFG->block_html_placeholders_allowcssclasses)) {
+            set_config('allowcssclasses', $CFG->block_html_placeholders_allowcssclasses, 'block_html_placeholders');
+            unset_config('block_html_placeholders_allowcssclasses');
+        }
 
-    // Automatically generated Moodle v3.6.0 release upgrade line.
-    // Put any upgrade step following this.
+        if (!empty($CFG->block_html_placeholders_placeholders)) {
+            set_config('placeholders', $CFG->block_html_placeholders_placeholders, 'block_html_placeholders');
+            unset_config('block_html_placeholders_placeholders');
+        }
 
-    // Automatically generated Moodle v3.7.0 release upgrade line.
-    // Put any upgrade step following this.
-
-    // Automatically generated Moodle v3.8.0 release upgrade line.
-    // Put any upgrade step following this.
-
-    // Automatically generated Moodle v3.9.0 release upgrade line.
-    // Put any upgrade step following this.
+        upgrade_block_savepoint(true, 2020061503, 'html_placeholders');
+    }
 
     return true;
 }

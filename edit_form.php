@@ -43,7 +43,7 @@ class block_html_placeholders_edit_form extends block_edit_form {
         $mform->addRule('config_text', null, 'required', null, 'client');
         $mform->setType('config_text', PARAM_RAW); // XSS is prevented when printing the block contents and serving files.
 
-        if (!empty($CFG->block_html_placeholders_allowcssclasses)) {
+        if (!empty(get_config('block_html_placeholders', 'allowcssclasses'))) {
             $mform->addElement('text', 'config_classes', get_string('configclasses', 'block_html_placeholders'));
             $mform->setType('config_classes', PARAM_TEXT);
             $mform->addHelpButton('config_classes', 'configclasses', 'block_html_placeholders');

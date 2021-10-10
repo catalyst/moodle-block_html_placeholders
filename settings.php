@@ -26,14 +26,14 @@ defined('MOODLE_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configcheckbox(
-        'block_html_placeholders_allowcssclasses',
+        'block_html_placeholders/allowcssclasses',
         get_string('allowadditionalcssclasses', 'block_html_placeholders'),
         get_string('configallowadditionalcssclasses', 'block_html_placeholders'),
         0)
     );
 
     $settings->add(new admin_setting_configtextarea(
-        'block_html_placeholders_placeholders',
+        'block_html_placeholders/placeholders',
         get_string('placeholders', 'block_html_placeholders'),
         get_string('placeholders_desc', 'block_html_placeholders'),
         '')
