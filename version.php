@@ -18,7 +18,7 @@
  * Version details
  *
  * @package    block_html_placeholders
- * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
+ * @copyright  Catalyst IT
  * @license    http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 

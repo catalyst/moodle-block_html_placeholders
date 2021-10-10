@@ -17,9 +17,10 @@
 /**
  * This file keeps track of upgrades to the html_placeholders block
  *
- * @since Moodle 2.0
- * @package block_html_placeholders
- * @copyright 2010 Dongsheng Cai
+ * @package   block_html_placeholders
+ * @author    2010 Dongsheng Cai
+ * @author    2021 Dmitrii Metelkin <dmitriim@catalyst-au.net>
+ * @copyright Catalyst IT
  * @license http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 

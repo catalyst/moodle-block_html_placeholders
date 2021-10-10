@@ -17,7 +17,9 @@
 /**
  * @package    block_html_placeholders
  * @subpackage backup-moodle2
- * @copyright  2003 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
+ * @author     2003 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
+ * @author     2021 Dmitrii Metelkin <dmitriim@catalyst-au.net>
+ * @copyright  Catalyst IT
  * @license    http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 

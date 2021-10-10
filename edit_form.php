@@ -18,14 +18,15 @@
  * Form for editing HTML block instances.
  *
  * @package   block_html_placeholders
- * @copyright 2009 Tim Hunt
+ * @author    2009 Tim Hunt
+ * @copyright Catalyst IT
  * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 
 /**
  * Form for editing HTML block instances.
  *
- * @copyright 2009 Tim Hunt
+ * @copyright Catalyst IT
  * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 class block_html_placeholders_edit_form extends block_edit_form {

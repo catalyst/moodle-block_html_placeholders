@@ -17,7 +17,7 @@
 /**
  * Settings for the HTML block
  *
- * @copyright 2012 Aaron Barnes
+ * @copyright  Catalyst IT
  * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  * @package   block_html_placeholders
  */

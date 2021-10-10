@@ -18,7 +18,9 @@
  * Strings for component 'block_html_placeholders', language 'en', branch 'MOODLE_20_STABLE'
  *
  * @package   block_html_placeholders
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @author    1999 Martin Dougiamas (http://dougiamas.com)
+ * @author    2021 Dmitrii Metelkin (dmitriim@catalyst-au.net)
+ * @copyright Catalyst IT
  * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 
