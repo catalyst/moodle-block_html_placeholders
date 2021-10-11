@@ -16,7 +16,9 @@
 
 /**
  * Form for editing HTML block instances.
- * @copyright 2010 Petr Skoda (http://skodak.org)
+ *
+ * @author    2010 Petr Skoda (http://skodak.org)
+ * @copyright Catalyst IT
  * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  * @package   block_html_placeholders
  * @category  files

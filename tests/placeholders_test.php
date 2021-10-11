@@ -96,7 +96,7 @@ empty |
 space | Two Words
 SETTING;
 
-        set_config('block_html_placeholders_placeholders', $testsetting);
+        set_config('placeholders', $testsetting, 'block_html_placeholders');
 
         $course = $this->getDataGenerator()->create_course();
         $block = $this->create_block($course);

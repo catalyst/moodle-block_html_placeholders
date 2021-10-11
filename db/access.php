@@ -17,9 +17,11 @@
 /**
  * HTML block caps.
  *
- * @package    block_html_placeholders
- * @copyright  Mark Nelson <markn@moodle.com>
- * @license    http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
+ * @package   block_html_placeholders
+ * @author    Mark Nelson <markn@moodle.com>
+ * @author    2021 Dmitrii Metelkin <dmitriim@catalyst-au.net>
+ * @copyright Catalyst IT
+ * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();

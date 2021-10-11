@@ -17,9 +17,10 @@
 /**
  * This file keeps track of upgrades to the html_placeholders block
  *
- * @since Moodle 2.0
- * @package block_html_placeholders
- * @copyright 2010 Dongsheng Cai
+ * @package   block_html_placeholders
+ * @author    2010 Dongsheng Cai
+ * @author    2021 Dmitrii Metelkin <dmitriim@catalyst-au.net>
+ * @copyright Catalyst IT
  * @license http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 
@@ -33,20 +34,19 @@ defined('MOODLE_INTERNAL') || die();
 function xmldb_block_html_placeholders_upgrade($oldversion) {
     global $CFG;
 
-    // Automatically generated Moodle v3.5.0 release upgrade line.
-    // Put any upgrade step following this.
+    if ($oldversion < 2020061503) {
+        if (!empty($CFG->block_html_placeholders_allowcssclasses)) {
+            set_config('allowcssclasses', $CFG->block_html_placeholders_allowcssclasses, 'block_html_placeholders');
+            unset_config('block_html_placeholders_allowcssclasses');
+        }
 
-    // Automatically generated Moodle v3.6.0 release upgrade line.
-    // Put any upgrade step following this.
+        if (!empty($CFG->block_html_placeholders_placeholders)) {
+            set_config('placeholders', $CFG->block_html_placeholders_placeholders, 'block_html_placeholders');
+            unset_config('block_html_placeholders_placeholders');
+        }
 
-    // Automatically generated Moodle v3.7.0 release upgrade line.
-    // Put any upgrade step following this.
-
-    // Automatically generated Moodle v3.8.0 release upgrade line.
-    // Put any upgrade step following this.
-
-    // Automatically generated Moodle v3.9.0 release upgrade line.
-    // Put any upgrade step following this.
+        upgrade_block_savepoint(true, 2020061503, 'html_placeholders');
+    }
 
     return true;
 }

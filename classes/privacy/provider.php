@@ -17,8 +17,10 @@
 /**
  * Privacy Subsystem implementation for block_html_placeholders.
  *
- * @package    block_html_placeholders
- * @copyright  2018 Andrew Nicols <andrew@nicols.co.uk>
+ * @package   block_html_placeholders
+ * @author    2018 Andrew Nicols <andrew@nicols.co.uk>
+ * @author    2021 Dmitrii Metelkin <dmitriim@catalyst-au.net>
+ * @copyright Catalyst IT
  * @license    http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 

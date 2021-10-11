@@ -29,8 +29,10 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Search area for block_html_placeholders blocks
  *
- * @package block_html_placeholders
- * @copyright 2017 The Open University
+ * @package   block_html_placeholders
+ * @author    2017 The Open University
+ * @author    2021 Dmitrii Metelkin <dmitriim@catalyst-au.net>
+ * @copyright Catalyst IT
  * @license http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 class content extends \core_search\base_block {

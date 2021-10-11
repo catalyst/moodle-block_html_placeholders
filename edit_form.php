@@ -18,14 +18,15 @@
  * Form for editing HTML block instances.
  *
  * @package   block_html_placeholders
- * @copyright 2009 Tim Hunt
+ * @author    2009 Tim Hunt
+ * @copyright Catalyst IT
  * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 
 /**
  * Form for editing HTML block instances.
  *
- * @copyright 2009 Tim Hunt
+ * @copyright Catalyst IT
  * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 class block_html_placeholders_edit_form extends block_edit_form {
@@ -43,7 +44,7 @@ class block_html_placeholders_edit_form extends block_edit_form {
         $mform->addRule('config_text', null, 'required', null, 'client');
         $mform->setType('config_text', PARAM_RAW); // XSS is prevented when printing the block contents and serving files.
 
-        if (!empty($CFG->block_html_placeholders_allowcssclasses)) {
+        if (!empty(get_config('block_html_placeholders', 'allowcssclasses'))) {
             $mform->addElement('text', 'config_classes', get_string('configclasses', 'block_html_placeholders'));
             $mform->setType('config_classes', PARAM_TEXT);
             $mform->addHelpButton('config_classes', 'configclasses', 'block_html_placeholders');

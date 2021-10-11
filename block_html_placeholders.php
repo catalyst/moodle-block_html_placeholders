@@ -18,7 +18,9 @@
  * Block instance.
  *
  * @package   block_html_placeholders
- * @copyright 1999 onwards Martin Dougiamas (http://dougiamas.com)
+ * @author    1999 Martin Dougiamas (http://dougiamas.com)
+ * @author    2021 Dmitrii Metelkin (dmitriim@catalyst-au.net)
+ * @copyright Catalyst IT
  * @license   http://www.gnu.org/copyleft/gpl.html_placeholders GNU GPL v3 or later
  */
 
@@ -262,7 +264,7 @@ class block_html_placeholders extends block_base {
 
         $attributes = parent::html_attributes();
 
-        if (!empty($CFG->block_html_placeholders_allowcssclasses)) {
+        if (!empty(get_config('block_html_placeholders', 'allowcssclasses'))) {
             if (!empty($this->config->classes)) {
                 $attributes['class'] .= ' '.$this->config->classes;
             }
@@ -282,7 +284,7 @@ class block_html_placeholders extends block_base {
 
         // Return all settings for all users since it is safe (no private keys, etc..).
         $instanceconfigs = !empty($this->config) ? $this->config : new stdClass();
-        $pluginconfigs = (object) ['allowcssclasses' => $CFG->block_html_placeholders_allowcssclasses];
+        $pluginconfigs = (object) ['allowcssclasses' => get_config('block_html_placeholders', 'allowcssclasses')];
 
         return (object) [
             'instance' => $instanceconfigs,

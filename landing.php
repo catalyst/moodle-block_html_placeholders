@@ -27,6 +27,8 @@ require_once(__DIR__ . '/../../config.php');
 $edit = optional_param('edit', null, PARAM_BOOL);
 $redirect = optional_param('redirect', null, PARAM_LOCALURL);
 
+require_course_login($SITE);
+
 if ($redirect) {
     $placeholders = new \block_html_placeholders\placeholders();
     $placeholders->remember_placeholders_for_user();

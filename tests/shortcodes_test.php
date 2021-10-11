@@ -68,7 +68,7 @@ profession | Doctor
 type | On-line
 SETTING;
 
-        set_config('block_html_placeholders_placeholders', $testsetting);
+        set_config('placeholders', $testsetting, 'block_html_placeholders');
         $this->assertSame($expected, shortcodes::placeholder($shortcode, [], $content, new \stdClass(), null));
     }
 
@@ -80,7 +80,7 @@ SETTING;
         $this->setAdminUser();
 
         $testsetting = "profession | Doctor";
-        set_config('block_html_placeholders_placeholders', $testsetting);
+        set_config('placeholders', $testsetting, 'block_html_placeholders');
 
         $this->assertNull(get_user_preferences('profession'));
 
