@@ -29,3 +29,4 @@ $plugin->release   = 2020061503;
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->requires  = 2020060900;        // Requires this Moodle version.
 $plugin->component = 'block_html_placeholders';      // Full name of the plugin (used for diagnostics).
+$plugin->supported = [39, 401];  // Available as of Moodle 3.9.0 or later.
